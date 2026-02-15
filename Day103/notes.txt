@@ -1,0 +1,4 @@
+dekho humne post create karne ke liye we need the caption imagerl and user 
+as caption and imageurl server cannot read jiske liye humne middlemware(multer) ko use kiya hai
+lekin user kaun hai and sahi wo valid bhi hai post create karne ke liye ki nahi 
+aisa toh nahi hai n ki user banne ka natak kar raha hai matlba user toh hai lekin humara user nahi hai humare server ne banaya hai 
