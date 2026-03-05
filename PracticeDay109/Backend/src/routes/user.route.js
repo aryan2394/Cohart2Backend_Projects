@@ -1,0 +1,10 @@
+const express=require("express");
+const userRouter=express.Router();
+const middleware=require("../middlewares/auth.middleware.js");
+const userController=require("../controllers/user.controller.js");
+userRouter.post("/follow/:followeeName",middleware,userController.followController);
+userRouter.post("/follow/accept/:followeeName",middleware,userController.acceptFollowRequestController);
+userRouter.post("/follow/reject/:followeeName",middleware,userController.rejectFollowRequestController);
+userRouter.post("/unfollow/:followeeName",middleware,userController.unfollowController);
+userRouter.post("/like/:postId",middleware,userController.likeController);
+module.exports=userRouter;

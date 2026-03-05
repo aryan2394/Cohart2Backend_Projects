@@ -1,0 +1,71 @@
+https://github.com/ankurdotio/cohort-2.0/blob/main/notes/edge-collection.md
+
+FOLLOW FOR TO LEARN 
+
+QUSETION?
+dekho humein har user ke liye store karna hai ki kitne followers and following users ke 1 option is create the array of all users id lekin ek maanlo 
+kohli ke 280 millions hai toh matlab 280 milion id hai 1 id=12 bytes  and 270 million id=3.3 gb 
+data only for storing the follwers of kohli but mongodb ka capacaity of one document ka max sise  hai wo 16 mb so how you will store the all floowers 
+
+Bahut solid question poocha hai 🔥
+Ye real-world system design level ka doubt hai.
+
+Tumne sahi calculate kiya:
+
+1 userId ≈ 12 bytes (MongoDB ObjectId)
+
+280 million followers
+
+280M × 12 bytes ≈ 3.3 GB
+
+MongoDB document limit = 16 MB
+
+Toh clearly ❌ hum ek document ke andar followers ka array store nahi kar sakte.
+
+❌ Galat Approach
+{
+   _id: kohliId,
+   name: "Kohli",
+   followers: [id1, id2, id3, ... 280 million]
+}
+
+
+Ye 16MB limit cross karega.
+
+✅ Real World Solution
+
+Hum followers ko separate collection mein store karte hain.
+
+Isko bolte hain:
+
+🔥 Many-to-Many relationship using separate collection
+
+🏗️ Correct Database Design
+👤 Users Collection
+{
+   _id: kohliId,
+   name: "Kohli",
+   followersCount: 280000000,
+   followingCount: 500
+}
+
+
+⚠️ Yahan sirf count store karenge — pura array nahi.
+
+WHAT IS EDGE COLLECTION?
+YE DO document mein connection establish karti hai ki 2 documents mein kya relation hai 
+
+DOCUMENT:har ek object jo store huwa hai database mein wo hota hai 
+example:{
+   username:aryankumar9947
+   email:shri@gmail.com
+}
+these is 1 document iss itarah ek object document hota hai and collection matlab similar document(smae types ke data ) ko store larke jo ek hota hai wo collection 
+
+follow{
+   id:
+   followBy:user
+   followTo:user
+}
+ismein followBy:ye document se hoga and followTo alag document se (matlab dono user alaga hai isliye do document ke beech mein relation)
+

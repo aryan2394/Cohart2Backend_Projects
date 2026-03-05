@@ -1,0 +1,68 @@
+main{
+    min-height: 100%;
+    width: 100%;
+}
+.child{
+    min-height: 500px;
+    max-width: 300px;
+    border: 1px solid greenyellow;
+    border-radius: 1rem;
+    padding: 0.5rem 0.7rem;
+}
+.top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .conic-area {
+    padding: 3px;  
+    border-radius: 50%;
+    background: conic-gradient(
+      #feda75,
+      #fa7e1e,
+      #d62976,
+      #962fbf,
+      #4f5bd5,
+      #feda75
+    );
+
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}
+.middle{
+    width: 95%;
+    border: 1px solid goldenrod;
+    margin: 0.5rem 0.5rem;
+    border-radius: 1rem;
+    img{
+        width: 90%;
+        object-fit: contain;
+    }
+}
+.icons{
+    display: flex;
+    justify-content: space-between;
+    margin:0.4rem 0;
+    svg{
+        width: 1rem;
+        aspect-ratio: 1/1;
+        color:whitesmoke;
+        height: 1rem;
+    }
+    button{
+        background: transparent;
+        outline: none;
+        border: none;
+        padding: 0 0.2rem;
+    }
+    .left{
+        display: flex;
+        gap: 1rem;
+    }
+}

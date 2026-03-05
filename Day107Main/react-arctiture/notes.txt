@@ -1,0 +1,17 @@
+// go on cohart2 https://github.com/ankurdotio/cohort-2.0
+// and notes mein go to react-arctiture.md
+
+Frontend Architecture – 4-Layer Model (React)
+This note describes a simple, scalable way to structure a React frontend into 4 strict layers:
+
+UI (Presentation)
+  ↓
+Hooks (Orchestration)
+  ↓
+State (Memory)
+  ↓
+API (Backend Communication)
+Each layer has a single responsibility. When layers leak into each other, technical debt starts.
+
+1:UI:   matlba ki ui ka kaam hoga sirf ui show karna 
+2:API:ka kaam hoga frontend ko backend se connect karna and usse realetd code 

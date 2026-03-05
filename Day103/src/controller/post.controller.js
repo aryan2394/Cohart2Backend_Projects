@@ -7,6 +7,7 @@ const imagekit = new ImageKit({
 })
 async function createPostController(req,res)
 {
+    // can able to create post if authorized and all thing goes well
     // console.log(req.body,req.file);
     const {caption}=req.body;
     const file = await imagekit.files.upload({
@@ -44,6 +45,74 @@ async function createPostController(req,res)
         "psotshriji":post
     })
 }
+async function getAllPostByUserController(req,res)
+{
+    const token=req.cookies.token;
+    // ek particaular user agar chahe ki wo kaun kaun se post craete kiya hai saare dekhna chahat hai then 
+    if(!token)
+    {
+        return res.status("no token by shri ji")
+    }
+    let payload=null;
+    try{
+        payload=await jwt.verify(token,process.env.JWT_SECRET);
+    }
+    catch(err)
+    {
+        return res.status(401).json({
+            "shriji":"unauthorized access"
+        })
+    }
+    const id=payload.id;
+    const allPosts=await postModel.find({
+        user:id
+    })
+    res.status(200).json({
+        "allposts":"shri ji",
+        allPosts
+    })
+}
+async function getPostDetails(req,res)
+{
+    const token=req.cookies.token;
+    if(!token)
+    {
+        return res.status(401).json({
+            "messagebyshriji":"unauthorized byy shri ji"
+        })
+    }
+    let payload=null;
+    try {
+        payload=jwt.verify(token,process.env.JWT_SECRET);
+    } catch (err) {
+        return res.status(401).json({
+            "shriji":"invalid token and unauthorized",
+        })
+    }
+    const id=payload.id;
+    const {postId}=req.params;
+    const post=await postModel.findById(postId);
+    if(!post)
+    {
+        // post hi delete ho gaya hai then
+        return res.status(403).json({
+            shriji:"no post available"
+        })
+    }
+    const checkUser=id.equals(post.user);
+    if(!checkUser)
+    {
+        return res.status(403).json({
+            shriji:"dusra user hai by shri ji"
+        })
+    }
+    res.status(200).json({
+        shriji:"feteched by shri ji",
+        post 
+    })
+}
 module.exports={
-    createPostController
+    createPostController,
+    getAllPostByUserController,
+    getPostDetails
 }

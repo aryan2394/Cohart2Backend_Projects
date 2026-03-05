@@ -1,0 +1,56 @@
+Image mein ek backend server architecture ka flow diagram dikhaya gaya hai (Node.js/Express type structure).
+
+Main points simple language mein samjho 👇
+
+🔹 1. Client → Server (App)
+
+Left side se request aati hai aur woh app (Express server) tak pahunchti hai.
+
+Client → app
+
+🔹 2. App → Routers
+
+App ke andar do routers connected hain:
+
+authRouter
+
+postRouter
+
+Yeh routers decide karte hain ki request kis route par jayegi.
+
+app
+ ├── authRouter
+ └── postRouter
+
+🔹 3. Post Routes ka Flow
+
+PostRouter ke andar 3 routes dikhaye gaye hain:
+
+1️⃣ POST /api/posts
+→ createPostController ko call karta hai
+👉 Naya post create karne ke liye
+
+2️⃣ GET /api/posts
+→ getPostController ko call karta hai
+👉 Saare posts laane ke liye
+
+3️⃣ GET /api/posts/details/:postId
+→ getPostDetailsController ko call karta hai
+👉 Ek specific post ki details laane ke liye
+
+VERY VERY IMPORTANT :saare jo bhi controllers hai unmein users jo request kar raha hai usko identify karna and usko validate karna is common
+
+toh hum usko kya karenge ek same common code hai toh hum kya karenge ki isko ek naye file mein shift kar denge name MIDDLEWARE 
+
+AB FLOW KAISE HOGA 
+
+ POST /api/posts
+
+ HUM ISKE BEECH MEIN HI USS MIDDLEWARE KO USE KARNEGE (JO ki humare user ko identify karke layega ki user kauan hai)
+ and phir user deatails ko aage forward kar denge 
+→ createPostController ko call karta hai
+👉 Naya post create karne ke liye
+
+flow:app> postRouter>api/post > then createPostController lekin ab 
+flow:app> postRouter>api/post > MIDDLEWARE> then createPostController 
+
